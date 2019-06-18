@@ -33,6 +33,7 @@ public class FileReader {
 				if(file.isFile()){
 					System.out.println(file.getName());
 				}else if(file.isDirectory()){
+					
 					System.out.println(file.getName());
 					subDirList(file.getCanonicalPath().toString()); 
 				}

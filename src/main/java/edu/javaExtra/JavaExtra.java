@@ -31,12 +31,14 @@ public class JavaExtra {
 		if (parseOptions(options, args)) {
 
 			if (ls) {
+				System.out.println("\n=====Basic ls Function====\n");
 				FileReader fr = new FileReader(path); // basic ls function
-
 				files = fr.getFiles();
 
 				if (named) {
-					System.out.println("========named_sorted=======");
+					System.out.println("\n========named_sorted=======\n");
+					
+					
 					Map<String, File> namedMap = new TreeMap<String, File>();
 
 					String nameKey = "";
@@ -52,7 +54,7 @@ public class JavaExtra {
 				}
 
 				if (sized) {
-					System.out.println("========sized_sorted=======");
+					System.out.println("\n========sized_sorted======\n");
 					Map<String, File> sortedMap = new TreeMap<String, File>();
 
 					String sizeKey = "";
@@ -69,11 +71,14 @@ public class JavaExtra {
 				}
 
 				if (directory) {
-					System.out.println("========All Files=======");
+					System.out.println("\n=========All Files=========\n");
+					
 					fr.subDirList(path);
 				}
 
 				if (help) {
+
+					System.out.println("\n========Help_Manual========\n");
 					printHelp(options);
 					System.exit(0);
 					return;
