@@ -20,7 +20,7 @@ public class JavaExtra {
 	
 	public void run(String[] args) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("hello");
 	}
 	private Options createOptions() {
 
