@@ -1,6 +1,8 @@
 package edu.javaExtra;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -20,6 +22,7 @@ public class JavaExtra {
 	boolean height;
 	boolean format;
 	boolean help;
+	boolean reverse;
 	String path = "data";
 
 	public void run(String[] args) {
@@ -27,7 +30,7 @@ public class JavaExtra {
 
 		Options options = createOptions();
 		File[] files;
-		// args = -ls -s  -n  -d  -h 
+		// args = -ls -s -n -d -h
 		if (parseOptions(options, args)) {
 
 			if (ls) {
@@ -38,8 +41,7 @@ public class JavaExtra {
 				if (named) {
 					System.out.println("\n========named_sorted=======\n");
 
-					Map<String, File> namedMap = new TreeMap<String, File>();
-
+					TreeMap<String, File> namedMap = new TreeMap<String, File>();
 					String nameKey = "";
 					for (File f1 : files) {
 						nameKey = f1.getName();
@@ -47,14 +49,41 @@ public class JavaExtra {
 						nameKey = "";
 					}
 
-					for (String tempKey : namedMap.keySet()) {
-						System.out.println(namedMap.get(tempKey).getName());
+					Iterator<String> treeMapIter = namedMap.keySet().iterator();
+
+					while (treeMapIter.hasNext()) {
+						String key = treeMapIter.next();
+						File f1 = namedMap.get(key);
+
+						System.out.println(f1.getName());
+
+					}
+				}
+
+				if (reverse) {
+					System.out.println("\n======reversed_sorted=======\n");
+					TreeMap<String, File> reversedMap = new TreeMap<String, File>(Collections.reverseOrder());
+					String nameKey = "";
+					for (File f1 : files) {
+						nameKey = f1.getName();
+						reversedMap.put(nameKey, f1);
+						nameKey = "";
+					}
+
+					Iterator<String> treeMapIter = reversedMap.keySet().iterator();
+
+					while (treeMapIter.hasNext()) {
+						String key = treeMapIter.next();
+						File f1 = reversedMap.get(key);
+
+						System.out.println(f1.getName());
+
 					}
 				}
 
 				if (sized) {
 					System.out.println("\n========sized_sorted======\n");
-					Map<String, File> sortedMap = new TreeMap<String, File>();
+					TreeMap<String, File> sortedMap = new TreeMap<String, File>();
 
 					String sizeKey = "";
 					for (File f1 : files) {
@@ -64,7 +93,7 @@ public class JavaExtra {
 					}
 
 					for (String tempKey : sortedMap.keySet()) {
-						System.out.println(sortedMap.get(tempKey).getName() + "\t|\t" + tempKey + "bytes");
+						System.out.println(sortedMap.get(tempKey).getName() + " \t " + tempKey + "bytes");
 					}
 
 				}
@@ -113,6 +142,11 @@ public class JavaExtra {
 				// .required()
 				.build()); // 용량별로 정
 
+		options.addOption(Option.builder("r").longOpt("reversed_sort")
+				.desc("Sort by File name in reverse and show files").argName("sort by name")
+				// .required()
+				.build()); // 이름 역순으로 정
+
 		options.addOption(Option.builder("n").longOpt("named_sort").desc("Sort by File name and show files")
 				.argName("sort by name")
 				// .required()
@@ -140,7 +174,7 @@ public class JavaExtra {
 			sized = cmd.hasOption("s");
 			directory = cmd.hasOption("d");
 			help = cmd.hasOption("h");
-
+			reverse = cmd.hasOption("r");
 		} catch (Exception e) {
 			printHelp(options);
 			return false;
