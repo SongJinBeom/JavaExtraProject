@@ -30,7 +30,7 @@ public class JavaExtra {
 
 		Options options = createOptions();
 		File[] files;
-		// args = -ls -s -n -d -h
+		// args = -ls -s -n  -r -d -h
 		if (parseOptions(options, args)) {
 
 			if (ls) {
@@ -93,14 +93,13 @@ public class JavaExtra {
 					}
 
 					for (String tempKey : sortedMap.keySet()) {
-						System.out.println(sortedMap.get(tempKey).getName() + " \t " + tempKey + "bytes");
+						System.out.println(sortedMap.get(tempKey).getName() + " \t " + tempKey + " bytes");
 					}
 
 				}
 
 				if (directory) {
 					System.out.println("\n=========All Files=========\n");
-
 					fr.subDirList(path);
 				}
 
@@ -129,6 +128,7 @@ public class JavaExtra {
 		// 디렉토리 전체 출력
 		// 용량순으로 출력
 		// 이름 순으로 출력
+		// 역순으로 출력 
 		Options options = new Options();
 
 		options.addOption(Option.builder("ls").longOpt("List")
