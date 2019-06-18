@@ -27,7 +27,7 @@ public class JavaExtra {
 
 		Options options = createOptions();
 		File[] files;
-		// args = -ls 0 -s 0 -n 0 -d 0 -h 0
+		// args = -ls -s  -n  -d  -h 
 		if (parseOptions(options, args)) {
 
 			if (ls) {
@@ -37,8 +37,7 @@ public class JavaExtra {
 
 				if (named) {
 					System.out.println("\n========named_sorted=======\n");
-					
-					
+
 					Map<String, File> namedMap = new TreeMap<String, File>();
 
 					String nameKey = "";
@@ -72,7 +71,7 @@ public class JavaExtra {
 
 				if (directory) {
 					System.out.println("\n=========All Files=========\n");
-					
+
 					fr.subDirList(path);
 				}
 
@@ -104,32 +103,29 @@ public class JavaExtra {
 		Options options = new Options();
 
 		options.addOption(Option.builder("ls").longOpt("List")
-				.desc("lists all files in the given directory, including those whose names start with \".\" ").hasArg()
-				// .argName("list all files")
+				.desc("lists all files in the given directory, including those whose names start with \".\" ")
+				.argName("list files")
 				// .required()
 				.build()); // 전체 ls
 
-		options.addOption(Option.builder("s").longOpt("sized_sort")
-				.desc("do not sort. Useful for directories containing large numbers of files.").hasArg()
-				.argName("display format")
+		options.addOption(Option.builder("s").longOpt("sized_sort").desc("Sort by File size and show files")
+				.argName("sort by size")
 				// .required()
 				.build()); // 용량별로 정
 
-		options.addOption(Option.builder("n").longOpt("named_sort").desc(
-				"long format, displaying Unix file types, permissions, number of hard links, owner, group, size, last-modified date and filename")
-				.hasArg().argName("display Information")
+		options.addOption(Option.builder("n").longOpt("named_sort").desc("Sort by File name and show files")
+				.argName("sort by name")
 				// .required()
 				.build()); // 이름순으로 정
 
-		options.addOption(Option.builder("d").longOpt("all-directory")
-				.desc("Set a path of a directory or a file to display").hasArg().argName("Path name to display")
+		options.addOption(Option.builder("d").longOpt("all-directory").desc("list all files in source")
+				.argName("all files in source")
 				// .required()
 				.build()); // 디렉토리 출
 
-		options.addOption(
-				Option.builder("h").longOpt("help").desc("show a help Page").hasArg().argName("Path name to display")
-						// .required()
-						.build()); // 도움
+		options.addOption(Option.builder("h").longOpt("help").desc("show a help Page").argName("Path name to display")
+				// .required()
+				.build()); // 도움
 
 		return options;
 	}
