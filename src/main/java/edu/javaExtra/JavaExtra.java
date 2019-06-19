@@ -93,7 +93,7 @@ public class JavaExtra {
 					}
 
 					for (String tempKey : sortedMap.keySet()) {
-						System.out.println(sortedMap.get(tempKey).getName() + " \t " + tempKey + " bytes");
+						System.out.println(sortedMap.get(tempKey).getName());
 					}
 
 				}
