@@ -30,7 +30,7 @@ public class JavaExtra {
 
 		Options options = createOptions();
 		File[] files;
-		// args = -ls -s -n  -r -d -h
+		// args is "-ls -s -n  -r -d -h"
 		if (parseOptions(options, args)) {
 
 			if (ls) {
